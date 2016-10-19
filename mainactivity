@@ -1,0 +1,53 @@
+package com.example.ppjj5.talktalk;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+    WebView wb1;
+    Button bt1, bt2, bt3;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        bt1 = (Button) findViewById(R.id.button1);
+        bt2 = (Button) findViewById(R.id.button2);
+        bt3 = (Button) findViewById(R.id.button3);
+
+        bt1.setOnClickListener(mover);
+        bt2.setOnClickListener(mover);
+        bt3.setOnClickListener(mover);
+
+        wb1 = (WebView) findViewById(R.id.striming);
+
+        wb1.setWebViewClient(new WebViewClient());
+        wb1.getSettings().setLoadsImagesAutomatically(true);
+        wb1.getSettings().setJavaScriptEnabled(true);
+        wb1.loadUrl("www.naver.com");
+        wb1.setWebChromeClient(new WebChromeClient());
+    }
+
+
+    private View.OnClickListener mover = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.button1:
+                    new android_client().execute("make");
+                    break;
+                case R.id.button2:
+                    new android_client().execute("learn");
+                    break;
+                case R.id.button3:
+                    new android_client().execute("create");
+                    break;
+            }
+        }
+    };
+}
