@@ -1,0 +1,33 @@
+package com.example.ppjj5.talktalk;
+
+
+import android.os.AsyncTask;
+
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+class android_client extends AsyncTask<String, Void, Void> {
+    @Override
+    protected Void doInBackground(String... params) {
+        try {
+            try {
+
+                Socket socket = new Socket("192.168.0.3",8888);
+                PrintWriter outToServer = new PrintWriter(
+                        new OutputStreamWriter(
+                                socket.getOutputStream()));
+                outToServer.print(params[0]);
+                outToServer.flush();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            return null;
+        }
+        return null;
+    }
+}
